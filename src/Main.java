@@ -60,11 +60,13 @@ public class Main {
     }
     private static String getTitleFromUser(Scanner scanner) {
         boolean forceUserToAnswer2 = true;
-        String resultTitle = "Стартовый заголовок";
+       String resultTitle = "Стартовый заголовок";
         System.out.println("Введите заголовок задачи: ");
+        scanner.nextLine();
+        //scanner.useDelimiter("\n");
         while (forceUserToAnswer2) {
-            scanner.nextLine();
             String name = scanner.nextLine();
+            ///scanner.nextLine();
             //System.out.println("name = " + name);
             if (name == null || name.isBlank()) {
                 System.out.println("Вы ввели некорректную информацию!");
@@ -125,7 +127,6 @@ public class Main {
         }
         return resultTime;
     }
-
     public static void addTask(TaskService taskService, Scanner scanner) {
         String title = getTitleFromUser(scanner);
 //        System.out.println("Введите заголовок задачи: ");
@@ -164,7 +165,6 @@ public class Main {
 //        } else {
 //            taskType = Type.WORK;
 //        }
-
         System.out.println("Введите повторяемость задачи: ");
         System.out.println(" 0. Не повторяется.");
         System.out.println(" 1. Ежедневная.");
@@ -196,13 +196,11 @@ public class Main {
                 throw new RuntimeException("Нет такого типа задач!");
         }
     }
-
     private static void removeTask(TaskService taskService, Scanner scanner) {
         System.out.println("Введите id задачи, которую нужно удалить");
         int id = scanner.nextInt();
         taskService.remove(id);
     }
-
     private static void getTaskByDay(TaskService taskService, Scanner scanner) {
         System.out.println("Введите дату задачи в формате dd.mm.yyyy: ");
         scanner.nextLine();
