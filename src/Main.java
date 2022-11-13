@@ -25,7 +25,11 @@ public class Main {
                             getTaskByDay(taskService, scanner);
                             break;
                         case 3:
-                            removeTask(taskService, scanner);
+                            try {
+                                removeTask(taskService, scanner);
+                            } catch (Exception e) {
+                                throw new RuntimeException("Нет такого ID в календаре!");
+                            }
                             break;
 //                        case 4:
 //                            getAllTaskFromTaskList();
@@ -196,9 +200,12 @@ public class Main {
                 throw new RuntimeException("Нет такого типа задач!");
         }
     }
-    private static void removeTask(TaskService taskService, Scanner scanner) {
+    private static void removeTask(TaskService taskService, Scanner scanner) throws Exception {
         System.out.println("Введите id задачи, которую нужно удалить");
         int id = scanner.nextInt();
+        if (id < 0) {
+            throw new Exception();
+        }
         taskService.remove(id);
     }
     private static void getTaskByDay(TaskService taskService, Scanner scanner) {
